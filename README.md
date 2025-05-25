@@ -13,7 +13,7 @@ Git
 ### Windows
 ```powershell
 # Clone this repository
-git clone https://github.com/tokanada/hsr-relic-fetch
+git clone "https://github.com/tokanada/hsr-relic-fetch"
 
 # Go to folder
 cd hsr-relic-fetch
@@ -34,7 +34,7 @@ python.exe main.py
 ### Linux/Mac
 ```bash
 # Clone this repository
-git clone https://github.com/tokanada/hsr-relic-fetch
+git clone "https://github.com/tokanada/hsr-relic-fetch"
 
 # Go to folder
 cd hsr-relic-fetch
