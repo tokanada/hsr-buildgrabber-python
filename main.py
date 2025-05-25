@@ -79,42 +79,65 @@ def get_relic_list(res, i):
 
 async def main() -> None:
     async with enka.HSRClient(enka.gi.Language.ENGLISH) as client:
-      
-        uid = int(input("Enter UID: "))
-        character_index = int(input("Enter Character Postion (on Showcase): ")) - 1
 
-        print("\nRetrieving Information...")
-        response = await client.fetch_showcase(uid)
-        print("\nResponse received\n")
+        while True:
+            try: 
+                print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+                print("=======================")
+                print("=  HSR Relic Fetcher  =")
+                print("=======================")
 
-        print(response.player.nickname)
-        character_dict = {
-            "name": get_character_name(response, character_index),
-            "id": get_character_id(response, character_index),
-            "hp": 100,
-            "sp": 50,
-            "level": get_character_level(response, character_index),
-            "promotion": get_character_promotion(response, character_index),
-            "rank": get_character_rank(response, character_index),
-            "lightcone": {
-                "id": get_lightcone_id(response, character_index),
-                "rank": get_lightcone_rank(response, character_index),
-                "level": get_lightcone_level(response, character_index),
-                "promotion": get_lightcone_promotion(response, character_index)
-            },
-            "relics": get_relic_list(response, character_index),
-            "use_technique": True
-        }
+                uid = int(input("\nEnter UID: "))
+                print(uid)
+                character_index = int(input("Enter Character Postion (on Showcase): ")) - 1
 
-        try:
-            json_output_string = json.dumps(character_dict, indent=4)
+                print("\nRetrieving Information...")
+                response = await client.fetch_showcase(uid)
+                print("\nResponse received\n")
 
-            print(json_output_string)
-        except TypeError as e:
-            print(f"Error: Could not serialize the dictionary to JSON. Reason: {e}")
-            print("Please ensure all items in your dictionary are JSON serializable.")
-            print("(e.g., basic types like str, int, float, bool, list, dict, None)")
-            print("(Custom objects, sets, or date/time objects need special handling.)")
+                print(response.player.nickname)
+                character_dict = {
+                    "name": get_character_name(response, character_index),
+                    "id": get_character_id(response, character_index),
+                    "hp": 100,
+                    "sp": 50,
+                    "level": get_character_level(response, character_index),
+                    "promotion": get_character_promotion(response, character_index),
+                    "rank": get_character_rank(response, character_index),
+                    "lightcone": {
+                        "id": get_lightcone_id(response, character_index),
+                        "rank": get_lightcone_rank(response, character_index),
+                        "level": get_lightcone_level(response, character_index),
+                        "promotion": get_lightcone_promotion(response, character_index)
+                    },
+                    "relics": get_relic_list(response, character_index),
+                    "use_technique": True
+                }
 
+                try:
+                    json_output_string = json.dumps(character_dict, indent=4)
+
+                    print(json_output_string)
+                except TypeError as e:
+                    print(f"Error: Could not serialize the dictionary to JSON. Reason: {e}")
+                    print("Please ensure all items in your dictionary are JSON serializable.")
+                    print("(e.g., basic types like str, int, float, bool, list, dict, None)")
+                    print("(Custom objects, sets, or date/time objects need special handling.)")
+
+                rp = input("\nTry another? (Y/n) ")
+                
+                if rp == "n" or rp == "N":
+                    break
+
+            except KeyboardInterrupt:
+                print("\nInput interrupted by user (Ctrl+C). Exiting gracefully.")
+                break  # Exit the loop
+            except EOFError:
+                print("\nEnd of input detected (Ctrl+D on Unix-like systems). Exiting gracefully.")
+                break  # Exit the loop
+            except Exception as e:
+                # Catch any other unexpected errors during input or processing
+                print(f"\nAn unexpected error occurred: {e}. Exiting gracefully.")
+                break # Exit the loop
 
 asyncio.run(main())
