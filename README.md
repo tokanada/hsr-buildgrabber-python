@@ -4,9 +4,8 @@ Fetches builds from your HSR Showcase using Enka API and converts it into JSON f
 
 ## Prerequisites
 
-Python 3
-
-Git
+* Python >=3.10
+* Git
 
 ## How to run
 
@@ -51,3 +50,6 @@ python -m pip install -r requirements.txt
 # Run Applet
 python main.py
 ```
+## Special Thanks to
+* [enka.py](https://github.com/seriaati/enka-py)
+* [enka.network](https://enka.network/)
