@@ -2,6 +2,8 @@ import enka
 import asyncio
 import json
 
+cache = enka.cache.SQLiteCache()
+
 sub_stat_dict = {
    1: [33.87,38.103755,42.33751], # HP
    2: [16.935,19.051877,21.168754], # ATK
@@ -78,7 +80,7 @@ def get_relic_list(res, i):
     return relic_list
 
 async def main() -> None:
-    async with enka.HSRClient(enka.gi.Language.ENGLISH) as client:
+    async with enka.HSRClient(cache=cache) as client:
 
         while True:
             try: 
@@ -95,7 +97,8 @@ async def main() -> None:
                 response = await client.fetch_showcase(uid)
                 print("\nResponse received\n")
 
-                print(response.player.nickname)
+                print(response.player.nickname,"\n\n")
+
                 character_dict = {
                     "name": get_character_name(response, character_index),
                     "id": get_character_id(response, character_index),
