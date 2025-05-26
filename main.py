@@ -33,6 +33,11 @@ def find_closest_number_index(numbers, count, target):
           min_difference = difference
           closest_index = i
 
+    if closest_index == 1:
+        closest_index = 4
+    elif closest_index == 2:
+        closest_index = 8
+
     return closest_index
 
 def get_character_name(res, i):
